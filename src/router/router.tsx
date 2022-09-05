@@ -4,8 +4,10 @@ import Pagina1 from '../pages/pagina1/paginas'
 import Pagina2 from '../pages/pagina2/pagina2'
 import { Navigate } from 'react-router'
 import { isAuthenticated } from '../pages/autenticacao/auntentica'
+import NaoEncontrada from '../pages/naoEncontrada/naoEncontrada'
 
-const PrivateRoute = ({ children, redirectTo}) => {
+
+const PrivateRoute = ({ children , redirectTo}: any) => {
 console.log("autenticado", isAuthenticated)
 return isAuthenticated () ? children : <Navigate to={redirectTo}/>
 };
@@ -29,6 +31,8 @@ const Router = () =>{
                     <Pagina2/>
                     </PrivateRoute>}
                     />
+                
+                <Route path='*' element={<NaoEncontrada/>}/>
             </Switch>
         
         </BrowserRouter>
