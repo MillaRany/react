@@ -1,7 +1,7 @@
 import {BrowserRouter,Route, Routes as Switch} from 'react-router-dom'
+import Login from '../pages/login/login'
+import Registrar from '../pages/registrar/registrar'
 import Home from '../pages/home/home'
-import Pagina1 from '../pages/pagina1/paginas'
-import Pagina2 from '../pages/pagina2/pagina2'
 import { Navigate } from 'react-router'
 import { isAuthenticated } from '../pages/autenticacao/auntentica'
 import NaoEncontrada from '../pages/naoEncontrada/naoEncontrada'
@@ -16,19 +16,16 @@ const Router = () =>{
     return(
         <BrowserRouter>
             <Switch>
-                <Route path='/' element={<Home/>}/>
+                <Route path='/' element={<Login/>}/>
 
-                <Route path='/pagina1'
-                 element={
-                    <PrivateRoute redirectTo='/'>
-                    <Pagina1/>
-                    </PrivateRoute>}
+                <Route path='/registrar'
+                 element={<Registrar/>}
                     />
 
-                <Route path='/pagina2'
+                <Route path='/home'
                  element={
                     <PrivateRoute redirectTo='/'>
-                    <Pagina2/>
+                    <Home/>
                     </PrivateRoute>}
                     />
                 
