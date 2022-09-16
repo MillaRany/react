@@ -1,30 +1,36 @@
-import { useCallback, useState } from "react"
-import React from "react"
-import {Link } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react"
+import {Link, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { registerInitiate } from "../../redux/actions";
 
-interface IFormState{
-    email:string;
-    password:string;
-}
 
 const Registrar = () =>{
 
-    const [formState, setFormState] = useState<IFormState>({
+    const [formState, setFormState] = useState({
         email:"",
         password:""
     });
     const {currentUser} = useSelector((formState)=>formState.user)
 
+    const navegue = useNavigate()
+    
+    useEffect(()=>{
+       if(currentUser){
+        navegue.push("/")
+       }
+    }, [currentUser, navegue])
+
     const dispatch = useDispatch()
 
     const{email, password} = formState
 
-    const handleSubmit = (e:any) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault()
+        dispatch(registerInitiate(email,password))
+        setFormState({email:"", password:""}) 
     }
-    const handleChange =(e:any) =>{
-        var {name,value} = e.taguet;
+    const handleChange =(e) =>{
+        let {name,value} = e.taguet;
         setFormState({...formState,[name]:value})
     }
         return(

@@ -1,6 +1,5 @@
 import *  as types from './actionsType'
 
-
 const registerStart = () =>({
 type: types.REGISTER_START,
 })
@@ -15,15 +14,16 @@ const registerFail = (error) =>({
     })
 
 
-export const registerInitiate =(email, password) =>{
+export const registerInitiate =(email, password, displayName) =>{
     return function(dispatch){
         dispatch(registerStart())
-        AuthenticatorAssertionResponse.createUserWithEmailPassword(email,password).then(({user})=>{
+        auth
+        .createUserWithEmailAndPassword(email,password)
+        .then(({user})=>{
             user.updateProfile({
-                displayName
+                displayName,
             })
             dispatch(registerSucess(user))
-
         })
         .catch((error)=>dispatch(registerFail(error.mensage)))
         }
